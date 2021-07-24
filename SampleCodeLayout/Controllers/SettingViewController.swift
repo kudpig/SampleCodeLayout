@@ -9,8 +9,10 @@ import UIKit
 
 class SettingViewController: UIViewController {
     
-    let titles = TitelForTextField.createTitles()
-    lazy var textFields = [textFieldX, textFieldY, textFieldWidth, textFieldHeight]
+    private let titles = TitelForTextField.createTitles()
+    private lazy var textFields = [textFieldX, textFieldY, textFieldWidth, textFieldHeight]
+    
+    weak var delegate: ToPassDataProtocol?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -32,7 +34,7 @@ class SettingViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.addTarget(self, action: #selector(reloadButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -40,7 +42,7 @@ class SettingViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.spacing = 20
+        stackView.spacing = 10
         return stackView
     }()
 
@@ -51,9 +53,9 @@ class SettingViewController: UIViewController {
         
         setupFrame(self: stackView,
                    setX: 50,
-                   setY: 50,
+                   setY: 30,
                    setWidth: view.frame.size.width-100,
-                   setHeight: view.frame.size.height-300)
+                   setHeight: view.frame.size.height/2)
         setupStackViewContents()
         view.addSubview(stackView)
     }
@@ -72,9 +74,7 @@ class SettingViewController: UIViewController {
         for (index, textfield) in textFields.enumerated() {
             textfield.setTextFieldParameters()
             textfield.addcloseToolbar()
-            textfield.keyboardType = .numberPad
-            textfield.returnKeyType = .default
-            textfield.textAlignment = .center
+            
             textfield.placeholder = titles[index].titleString
             self.stackView.addArrangedSubview(textfield)
         }
@@ -82,8 +82,44 @@ class SettingViewController: UIViewController {
         self.stackView.addArrangedSubview(updateButton)
     }
     
-    @objc private func reloadButtonTapped() {
+    @objc private func updateButtonTapped() {
         print("tap")
+        textFieldX.resignFirstResponder()
+        textFieldY.resignFirstResponder()
+        textFieldWidth.resignFirstResponder()
+        textFieldHeight.resignFirstResponder()
+        
+        guard let textX = textFieldX.text,
+              let textY = textFieldY.text,
+              let textWidth = textFieldWidth.text,
+              let textHeight = textFieldHeight.text,
+              !textX.isEmpty,
+              !textY.isEmpty,
+              !textWidth.isEmpty,
+              !textHeight.isEmpty else {
+            // エラーハンドリング
+            print("入力されていない項目があります")
+            return
+        }
+        
+        guard let intX = NumberFormatter().number(from: textX) as? Int,
+              let intY = NumberFormatter().number(from: textY) as? Int,
+              let intWidth = NumberFormatter().number(from: textWidth) as? Int,
+              let intHeight = NumberFormatter().number(from: textHeight) as? Int else {
+            // エラーハンドリング
+            print("数字が入力されていません")
+            return
+        }
+        
+        let inputConstraint = ObjectConstraint(topAnchorX: intX,
+                                               leftAnchorY: intY,
+                                               widthAnchorInt: intWidth,
+                                               heightAnchorInt: intHeight)
+        
+        delegate?.tappedUpdateButton(data: inputConstraint)
+        self.dismiss(animated: true, completion: nil)
     }
+    
+    
 
 }

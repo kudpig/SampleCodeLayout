@@ -16,6 +16,7 @@
 		8F79D5A526AAAED700004086 /* ObjectConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5A426AAAED700004086 /* ObjectConstraint.swift */; };
 		8F79D5A726AABA6F00004086 /* TextFieldExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5A626AABA6F00004086 /* TextFieldExtention.swift */; };
 		8F79D5A926AAC24900004086 /* TextFieldTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5A826AAC24900004086 /* TextFieldTitle.swift */; };
+		8F79D5B426ABD34300004086 /* ToPassDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5B326ABD34300004086 /* ToPassDataProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		8F79D5A426AAAED700004086 /* ObjectConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectConstraint.swift; sourceTree = "<group>"; };
 		8F79D5A626AABA6F00004086 /* TextFieldExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtention.swift; sourceTree = "<group>"; };
 		8F79D5A826AAC24900004086 /* TextFieldTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTitle.swift; sourceTree = "<group>"; };
+		8F79D5B326ABD34300004086 /* ToPassDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToPassDataProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				8F79D59726AAA58E00004086 /* LaunchScreen.storyboard */,
 				8F79D59526AAA58E00004086 /* Assets.xcassets */,
 				8F79D59A26AAA58E00004086 /* Info.plist */,
+				8F79D5B326ABD34300004086 /* ToPassDataProtocol.swift */,
 			);
 			path = SampleCodeLayout;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F79D5A326AAA7C600004086 /* Router.swift in Sources */,
+				8F79D5B426ABD34300004086 /* ToPassDataProtocol.swift in Sources */,
 				8F79D59126AAA58D00004086 /* PreviewViewController.swift in Sources */,
 				8F79D5A726AABA6F00004086 /* TextFieldExtention.swift in Sources */,
 				8F79D58D26AAA58D00004086 /* AppDelegate.swift in Sources */,

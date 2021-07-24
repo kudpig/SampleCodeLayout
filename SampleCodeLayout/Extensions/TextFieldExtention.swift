@@ -7,22 +7,24 @@
 
 import UIKit
 
-struct TextFieldParameters {
-  
-    var backgroundColor: UIColor = .white
+struct TextFieldLayerParameters {
     var cornerRadius: CGFloat = 12
     var borderWidth: CGFloat = 1
     var borderColor: CGColor = UIColor.lightGray.cgColor
-    
 }
 
 extension UITextField {
     
-    func setTextFieldParameters(parameter: TextFieldParameters = .init()) {
-        self.backgroundColor = parameter.backgroundColor
+    func setTextFieldParameters(parameter: TextFieldLayerParameters = .init()) {
+        
         self.layer.cornerRadius = parameter.cornerRadius
         self.layer.borderWidth = parameter.borderWidth
         self.layer.borderColor = parameter.borderColor
+        
+        self.backgroundColor = .white
+        self.keyboardType = .numberPad
+        self.returnKeyType = .default
+        self.textAlignment = .center
     }
     
 }

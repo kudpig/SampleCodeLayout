@@ -14,10 +14,10 @@ struct TitelForTextField {
     static func createTitles() -> [TitelForTextField] {
         
         let createArray = [
-            TitelForTextField(titleString: "Xを数字で入力してください"),
-            TitelForTextField(titleString: "Yを数字で入力してください"),
-            TitelForTextField(titleString: "Widthを数字で入力してください"),
-            TitelForTextField(titleString: "Heightを数字で入力してください")
+            TitelForTextField(titleString: "Xを数字で入力"),
+            TitelForTextField(titleString: "Yを数字で入力"),
+            TitelForTextField(titleString: "Widthを数字で入力"),
+            TitelForTextField(titleString: "Heightを数字で入力")
         ]
         
         return createArray

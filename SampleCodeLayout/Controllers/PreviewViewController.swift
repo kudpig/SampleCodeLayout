@@ -9,17 +9,17 @@ import UIKit
 
 class PreviewViewController: UIViewController {
     
-    var sampleX = NSLayoutConstraint()
-    var sampleY = NSLayoutConstraint()
-    var sampleWidth = NSLayoutConstraint()
-    var sampleHeight = NSLayoutConstraint()
+    private var sampleX = NSLayoutConstraint()
+    private var sampleY = NSLayoutConstraint()
+    private var sampleWidth = NSLayoutConstraint()
+    private var sampleHeight = NSLayoutConstraint()
     
-    var moveObjectContsraint = ObjectConstraint(topAnchorX: 50, topAnchorY: 50, widthAnchorInt: 50, heightAnchorInt: 50)
+    private var itemContsraint: ObjectConstraint = ObjectConstraint.createDefaultConstraint()
     
-    private let moveView: UIView = {
-        let moveView = UIView()
-        moveView.backgroundColor = .systemGray
-        return moveView
+    private let itemView: UIView = {
+        let itemView = UIView()
+        itemView.backgroundColor = .systemGray
+        return itemView
     }()
 
     override func viewDidLoad() {
@@ -30,24 +30,25 @@ class PreviewViewController: UIViewController {
                                                             target: self,
                                                             action: #selector(didTapSetting))
         
-        moveView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(moveView)
-        feachNewConstraint(constraint: self.moveObjectContsraint)
+        itemView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(itemView)
+        feachNewConstraint(constraint: self.itemContsraint)
         
         view.backgroundColor = .systemBackground
     }
     
     @objc private func didTapSetting() {
         let settingVC = SettingViewController()
+        settingVC.delegate = self
         
         self.present(settingVC, animated: true, completion: nil)
     }
     
     private func feachNewConstraint(constraint: ObjectConstraint) {
-        sampleX =  moveView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: CGFloat(constraint.topAnchorX))
-        sampleY = moveView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: CGFloat(constraint.topAnchorY))
-        sampleWidth = moveView.widthAnchor.constraint(equalToConstant: CGFloat(constraint.widthAnchorInt))
-        sampleHeight = moveView.heightAnchor.constraint(equalToConstant: CGFloat(constraint.heightAnchorInt))
+        sampleX =  itemView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: CGFloat(constraint.topAnchorX))
+        sampleY = itemView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: CGFloat(constraint.leftAnchorY))
+        sampleWidth = itemView.widthAnchor.constraint(equalToConstant: CGFloat(constraint.widthAnchorInt))
+        sampleHeight = itemView.heightAnchor.constraint(equalToConstant: CGFloat(constraint.heightAnchorInt))
         
         sampleX.isActive = true
         sampleY.isActive = true
@@ -56,7 +57,25 @@ class PreviewViewController: UIViewController {
         
         self.view.layoutIfNeeded()
     }
+    
+    private func feachChangeConstraint() {
+        itemView.removeConstraint(sampleX)
+        itemView.removeConstraint(sampleY)
+        itemView.removeConstraint(sampleWidth)
+        itemView.removeConstraint(sampleHeight)
+        self.loadView()
+        self.viewDidLoad()
+    }
 
 
 }
 
+extension PreviewViewController: ToPassDataProtocol {
+    
+    func tappedUpdateButton(data: ObjectConstraint) {
+        print("プロトコルから受け取ったdata: \(data)")
+        itemContsraint = data
+        feachChangeConstraint()
+    }
+    
+}
