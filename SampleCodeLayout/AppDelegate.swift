@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
         Router.showPreview(window: window)
-        
         return true
     }
 

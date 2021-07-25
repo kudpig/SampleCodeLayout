@@ -32,19 +32,16 @@ class PreviewViewController: UIViewController {
         
         itemView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(itemView)
-        feachNewConstraint(constraint: self.itemContsraint)
+        feachConstraint(constraint: self.itemContsraint)
         
         view.backgroundColor = .systemBackground
     }
     
     @objc private func didTapSetting() {
-        let settingVC = SettingViewController()
-        settingVC.delegate = self
-        
-        self.present(settingVC, animated: true, completion: nil)
+        Router.showSetting(fromVC: self)
     }
     
-    private func feachNewConstraint(constraint: ObjectConstraint) {
+    private func feachConstraint(constraint: ObjectConstraint) {
         sampleX =  itemView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: CGFloat(constraint.topAnchorX))
         sampleY = itemView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: CGFloat(constraint.leftAnchorY))
         sampleWidth = itemView.widthAnchor.constraint(equalToConstant: CGFloat(constraint.widthAnchorInt))
@@ -58,7 +55,7 @@ class PreviewViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    private func feachChangeConstraint() {
+    private func reomoveConstraintAndReload() {
         itemView.removeConstraint(sampleX)
         itemView.removeConstraint(sampleY)
         itemView.removeConstraint(sampleWidth)
@@ -67,15 +64,13 @@ class PreviewViewController: UIViewController {
         self.viewDidLoad()
     }
 
-
 }
 
-extension PreviewViewController: ToPassDataProtocol {
+extension PreviewViewController: PreviewPresenterOutput {
     
-    func tappedUpdateButton(data: ObjectConstraint) {
-        print("プロトコルから受け取ったdata: \(data)")
-        itemContsraint = data
-        feachChangeConstraint()
+    func update(model: ObjectConstraint) {
+        itemContsraint = model
+        reomoveConstraintAndReload()
     }
     
 }

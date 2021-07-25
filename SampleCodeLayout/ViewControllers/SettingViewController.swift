@@ -12,8 +12,6 @@ class SettingViewController: UIViewController {
     private let titles = TitelForTextField.createTitles()
     private lazy var textFields = [textFieldX, textFieldY, textFieldWidth, textFieldHeight]
     
-    weak var delegate: ToPassDataProtocol?
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "設置位置を入力してください"
@@ -34,7 +32,7 @@ class SettingViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapUpdateButton), for: .touchUpInside)
         return button
     }()
     
@@ -45,10 +43,16 @@ class SettingViewController: UIViewController {
         stackView.spacing = 10
         return stackView
     }()
-
+    
+    private var presenter: SettingPresenterInput!
+    func inject(presenter: SettingPresenterInput) {
+        self.presenter = presenter
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "設定画面"
+        
         view.backgroundColor = .systemBackground
         
         setupFrame(self: stackView,
@@ -82,44 +86,39 @@ class SettingViewController: UIViewController {
         self.stackView.addArrangedSubview(updateButton)
     }
     
-    @objc private func updateButtonTapped() {
-        print("tap")
+    @objc private func tapUpdateButton() {
         textFieldX.resignFirstResponder()
         textFieldY.resignFirstResponder()
         textFieldWidth.resignFirstResponder()
         textFieldHeight.resignFirstResponder()
         
-        guard let textX = textFieldX.text,
-              let textY = textFieldY.text,
-              let textWidth = textFieldWidth.text,
-              let textHeight = textFieldHeight.text,
-              !textX.isEmpty,
-              !textY.isEmpty,
-              !textWidth.isEmpty,
-              !textHeight.isEmpty else {
-            // エラーハンドリング
-            print("入力されていない項目があります")
-            return
-        }
+        let parameters = InputParameters(textX: textFieldX.text,
+                                         textY: textFieldY.text,
+                                         textWidth: textFieldWidth.text,
+                                         textHeight: textFieldHeight.text)
         
-        guard let intX = NumberFormatter().number(from: textX) as? Int,
-              let intY = NumberFormatter().number(from: textY) as? Int,
-              let intWidth = NumberFormatter().number(from: textWidth) as? Int,
-              let intHeight = NumberFormatter().number(from: textHeight) as? Int else {
-            // エラーハンドリング
-            print("数字が入力されていません")
-            return
-        }
-        
-        let inputConstraint = ObjectConstraint(topAnchorX: intX,
-                                               leftAnchorY: intY,
-                                               widthAnchorInt: intWidth,
-                                               heightAnchorInt: intHeight)
-        
-        delegate?.tappedUpdateButton(data: inputConstraint)
-        self.dismiss(animated: true, completion: nil)
+        self.presenter.input(parameters: parameters)
     }
     
+    private func alertError(message: String) {
+        let alert = UIAlertController(title: "入力エラー", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "閉じる", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
     
+}
 
+extension SettingViewController: SettingPresenterOutput {
+    
+    func dismiss(permission: Bool) {
+        guard permission else {
+            return
+        }
+        Router.backView(fromVC: self)
+    }
+    
+    func getError(error: InputError) {
+        self.alertError(message: error.errorDescription)
+    }
+    
 }
