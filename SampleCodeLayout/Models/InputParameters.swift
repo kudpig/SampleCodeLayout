@@ -18,7 +18,6 @@ enum InputError: Error, LocalizedError {
         case .dataError:
             return "入力データに不正があります"
         }
-        
     }
 }
 
@@ -45,8 +44,6 @@ struct InputData {
               !textY.isEmpty,
               !textWidth.isEmpty,
               !textHeight.isEmpty else {
-            // エラーハンドリング
-            print("入力されていない項目があります")
             completion?(.failure(.notEnteredError))
             return
         }
@@ -55,16 +52,14 @@ struct InputData {
               let intY = NumberFormatter().number(from: textY) as? Int,
               let intWidth = NumberFormatter().number(from: textWidth) as? Int,
               let intHeight = NumberFormatter().number(from: textHeight) as? Int else {
-            // エラーハンドリング
-            print("数字が入力されていません")
             completion?(.failure(.validationError))
             return
         }
         
         let model = ObjectConstraint(topAnchorX: intX,
-                                               leftAnchorY: intY,
-                                               widthAnchorInt: intWidth,
-                                               heightAnchorInt: intHeight)
+                                     leftAnchorY: intY,
+                                     widthAnchorInt: intWidth,
+                                     heightAnchorInt: intHeight)
         
         completion?(.success(model))
     }

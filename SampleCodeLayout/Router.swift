@@ -20,7 +20,6 @@ final class Router {
     
     static func showSetting(fromVC: UIViewController) {
         let vc = SettingViewController()
-        vc.delegate = fromVC as? ToPassDataProtocol
         let presenter = Presenter(outputSetting: vc, outputPreview: fromVC as! PreviewPresenterOutput)
         vc.inject(presenter: presenter)
         show(fromVC: fromVC, nextVC: vc)

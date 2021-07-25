@@ -38,8 +38,6 @@ final class Presenter {
 extension Presenter: SettingPresenterInput {
     
     func input(parameters: InputParameters) {
-        print("プレゼンターがinputで受け取りました:\(parameters)")
-        
         self.data.getModelData(parameters: parameters, completion: { [weak self] result in
             switch result {
             case .success(let model):
@@ -50,37 +48,6 @@ extension Presenter: SettingPresenterInput {
             }
         })
         
-        // このバリデーション部分を切り分けられるといいかも
-        //guard let textX = parameters.textX,
-        //      let textY = parameters.textY,
-        //      let textWidth = parameters.textWidth,
-        //      let textHeight = parameters.textHeight,
-        //      !textX.isEmpty,
-        //      !textY.isEmpty,
-        //      !textWidth.isEmpty,
-        //      !textHeight.isEmpty else {
-        //    // エラーハンドリング
-        //    print("入力されていない項目があります")
-        //    return
-        //}
-        //
-        //guard let intX = NumberFormatter().number(from: textX) as? Int,
-        //      let intY = NumberFormatter().number(from: textY) as? Int,
-        //      let intWidth = NumberFormatter().number(from: textWidth) as? Int,
-        //      let intHeight = NumberFormatter().number(from: textHeight) as? Int else {
-        //    // エラーハンドリング
-        //    print("数字が入力されていません")
-        //    return
-        //}
-        //
-        //let inputConstraint = ObjectConstraint(topAnchorX: intX,
-        //                                       leftAnchorY: intY,
-        //                                       widthAnchorInt: intWidth,
-        //                                       heightAnchorInt: intHeight)
-        //
-        //
-        //
-        //self.output?.update(model: inputConstraint)
     }
     
 }

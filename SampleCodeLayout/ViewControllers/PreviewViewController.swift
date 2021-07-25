@@ -64,13 +64,11 @@ class PreviewViewController: UIViewController {
         self.viewDidLoad()
     }
 
-
 }
 
 extension PreviewViewController: PreviewPresenterOutput {
     
     func update(model: ObjectConstraint) {
-        print("outputのModel:\(model)")
         itemContsraint = model
         reomoveConstraintAndReload()
     }

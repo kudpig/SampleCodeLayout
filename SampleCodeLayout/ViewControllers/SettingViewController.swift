@@ -12,8 +12,6 @@ class SettingViewController: UIViewController {
     private let titles = TitelForTextField.createTitles()
     private lazy var textFields = [textFieldX, textFieldY, textFieldWidth, textFieldHeight]
     
-    weak var delegate: ToPassDataProtocol?
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "設置位置を入力してください"
@@ -34,7 +32,7 @@ class SettingViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapUpdateButton), for: .touchUpInside)
         return button
     }()
     
@@ -45,10 +43,16 @@ class SettingViewController: UIViewController {
         stackView.spacing = 10
         return stackView
     }()
-
+    
+    private var presenter: SettingPresenterInput!
+    func inject(presenter: SettingPresenterInput) {
+        self.presenter = presenter
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "設定画面"
+        
         view.backgroundColor = .systemBackground
         
         setupFrame(self: stackView,
@@ -82,32 +86,26 @@ class SettingViewController: UIViewController {
         self.stackView.addArrangedSubview(updateButton)
     }
     
-    private var presenter: SettingPresenterInput!
-    func inject(presenter: SettingPresenterInput) {
-        self.presenter = presenter
-    }
-    
-    @objc func updateButtonTapped() {
+    @objc private func tapUpdateButton() {
         textFieldX.resignFirstResponder()
         textFieldY.resignFirstResponder()
         textFieldWidth.resignFirstResponder()
         textFieldHeight.resignFirstResponder()
         
         let parameters = InputParameters(textX: textFieldX.text,
-                                                textY: textFieldY.text,
-                                                textWidth: textFieldWidth.text,
-                                                textHeight: textFieldHeight.text)
+                                         textY: textFieldY.text,
+                                         textWidth: textFieldWidth.text,
+                                         textHeight: textFieldHeight.text)
         
         self.presenter.input(parameters: parameters)
     }
     
-    func alertError(message: String) {
+    private func alertError(message: String) {
         let alert = UIAlertController(title: "入力エラー", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "閉じる", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
-
 }
 
 extension SettingViewController: SettingPresenterOutput {
