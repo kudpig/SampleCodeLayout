@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F671FDA26AD46070025AFCF /* InputParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F671FD926AD46070025AFCF /* InputParameters.swift */; };
 		8F79D58D26AAA58D00004086 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D58C26AAA58D00004086 /* AppDelegate.swift */; };
 		8F79D59126AAA58D00004086 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D59026AAA58D00004086 /* PreviewViewController.swift */; };
 		8F79D59626AAA58E00004086 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F79D59526AAA58E00004086 /* Assets.xcassets */; };
@@ -17,9 +18,11 @@
 		8F79D5A726AABA6F00004086 /* TextFieldExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5A626AABA6F00004086 /* TextFieldExtention.swift */; };
 		8F79D5A926AAC24900004086 /* TextFieldTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5A826AAC24900004086 /* TextFieldTitle.swift */; };
 		8F79D5B426ABD34300004086 /* ToPassDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5B326ABD34300004086 /* ToPassDataProtocol.swift */; };
+		8F79D5B726AC2DEC00004086 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5B626AC2DEC00004086 /* Presenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8F671FD926AD46070025AFCF /* InputParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputParameters.swift; sourceTree = "<group>"; };
 		8F79D58926AAA58D00004086 /* SampleCodeLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleCodeLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F79D58C26AAA58D00004086 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F79D59026AAA58D00004086 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
@@ -32,6 +35,7 @@
 		8F79D5A626AABA6F00004086 /* TextFieldExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtention.swift; sourceTree = "<group>"; };
 		8F79D5A826AAC24900004086 /* TextFieldTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTitle.swift; sourceTree = "<group>"; };
 		8F79D5B326ABD34300004086 /* ToPassDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToPassDataProtocol.swift; sourceTree = "<group>"; };
+		8F79D5B626AC2DEC00004086 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 			children = (
 				8F79D58C26AAA58D00004086 /* AppDelegate.swift */,
 				8F79D5A226AAA7C600004086 /* Router.swift */,
+				8F79D5B526AC2DCC00004086 /* Presenter */,
 				8F79D5AD26AAC4F700004086 /* Controllers */,
 				8F79D5AE26AAC51900004086 /* Extensions */,
 				8F79D5AB26AAC4D600004086 /* Models */,
@@ -80,8 +85,9 @@
 		8F79D5AB26AAC4D600004086 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8F79D5A426AAAED700004086 /* ObjectConstraint.swift */,
 				8F79D5A826AAC24900004086 /* TextFieldTitle.swift */,
+				8F79D5A426AAAED700004086 /* ObjectConstraint.swift */,
+				8F671FD926AD46070025AFCF /* InputParameters.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -101,6 +107,14 @@
 				8F79D5A626AABA6F00004086 /* TextFieldExtention.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8F79D5B526AC2DCC00004086 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8F79D5B626AC2DEC00004086 /* Presenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,7 +186,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F79D5B726AC2DEC00004086 /* Presenter.swift in Sources */,
 				8F79D5A326AAA7C600004086 /* Router.swift in Sources */,
+				8F671FDA26AD46070025AFCF /* InputParameters.swift in Sources */,
 				8F79D5B426ABD34300004086 /* ToPassDataProtocol.swift in Sources */,
 				8F79D59126AAA58D00004086 /* PreviewViewController.swift in Sources */,
 				8F79D5A726AABA6F00004086 /* TextFieldExtention.swift in Sources */,

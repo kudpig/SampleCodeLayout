@@ -82,44 +82,45 @@ class SettingViewController: UIViewController {
         self.stackView.addArrangedSubview(updateButton)
     }
     
-    @objc private func updateButtonTapped() {
-        print("tap")
+    private var presenter: SettingPresenterInput!
+    func inject(presenter: SettingPresenterInput) {
+        self.presenter = presenter
+    }
+    
+    @objc func updateButtonTapped() {
         textFieldX.resignFirstResponder()
         textFieldY.resignFirstResponder()
         textFieldWidth.resignFirstResponder()
         textFieldHeight.resignFirstResponder()
         
-        guard let textX = textFieldX.text,
-              let textY = textFieldY.text,
-              let textWidth = textFieldWidth.text,
-              let textHeight = textFieldHeight.text,
-              !textX.isEmpty,
-              !textY.isEmpty,
-              !textWidth.isEmpty,
-              !textHeight.isEmpty else {
-            // エラーハンドリング
-            print("入力されていない項目があります")
-            return
-        }
+        let parameters = InputParameters(textX: textFieldX.text,
+                                                textY: textFieldY.text,
+                                                textWidth: textFieldWidth.text,
+                                                textHeight: textFieldHeight.text)
         
-        guard let intX = NumberFormatter().number(from: textX) as? Int,
-              let intY = NumberFormatter().number(from: textY) as? Int,
-              let intWidth = NumberFormatter().number(from: textWidth) as? Int,
-              let intHeight = NumberFormatter().number(from: textHeight) as? Int else {
-            // エラーハンドリング
-            print("数字が入力されていません")
-            return
-        }
-        
-        let inputConstraint = ObjectConstraint(topAnchorX: intX,
-                                               leftAnchorY: intY,
-                                               widthAnchorInt: intWidth,
-                                               heightAnchorInt: intHeight)
-        
-        delegate?.tappedUpdateButton(data: inputConstraint)
-        self.dismiss(animated: true, completion: nil)
+        self.presenter.input(parameters: parameters)
     }
     
+    func alertError(message: String) {
+        let alert = UIAlertController(title: "入力エラー", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "閉じる", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
     
 
+}
+
+extension SettingViewController: SettingPresenterOutput {
+    
+    func dismiss(permission: Bool) {
+        guard permission else {
+            return
+        }
+        Router.backView(fromVC: self)
+    }
+    
+    func getError(error: InputError) {
+        self.alertError(message: error.errorDescription)
+    }
+    
 }
