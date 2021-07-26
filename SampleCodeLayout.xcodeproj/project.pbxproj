@@ -16,7 +16,6 @@
 		8F79D5A326AAA7C600004086 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5A226AAA7C600004086 /* Router.swift */; };
 		8F79D5A526AAAED700004086 /* ObjectConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5A426AAAED700004086 /* ObjectConstraint.swift */; };
 		8F79D5A726AABA6F00004086 /* TextFieldExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5A626AABA6F00004086 /* TextFieldExtention.swift */; };
-		8F79D5A926AAC24900004086 /* TextFieldTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5A826AAC24900004086 /* TextFieldTitle.swift */; };
 		8F79D5B726AC2DEC00004086 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F79D5B626AC2DEC00004086 /* Presenter.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		8F79D5A226AAA7C600004086 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		8F79D5A426AAAED700004086 /* ObjectConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectConstraint.swift; sourceTree = "<group>"; };
 		8F79D5A626AABA6F00004086 /* TextFieldExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtention.swift; sourceTree = "<group>"; };
-		8F79D5A826AAC24900004086 /* TextFieldTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTitle.swift; sourceTree = "<group>"; };
 		8F79D5B626AC2DEC00004086 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,10 +66,10 @@
 			children = (
 				8F79D58C26AAA58D00004086 /* AppDelegate.swift */,
 				8F79D5A226AAA7C600004086 /* Router.swift */,
+				8F79D5AE26AAC51900004086 /* Extensions */,
 				8F79D5AB26AAC4D600004086 /* Models */,
 				8F79D5AD26AAC4F700004086 /* ViewControllers */,
 				8F79D5B526AC2DCC00004086 /* Presenter */,
-				8F79D5AE26AAC51900004086 /* Extensions */,
 				8F79D59726AAA58E00004086 /* LaunchScreen.storyboard */,
 				8F79D59526AAA58E00004086 /* Assets.xcassets */,
 				8F79D59A26AAA58E00004086 /* Info.plist */,
@@ -83,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				8F671FD926AD46070025AFCF /* InputParameters.swift */,
-				8F79D5A826AAC24900004086 /* TextFieldTitle.swift */,
 				8F79D5A426AAAED700004086 /* ObjectConstraint.swift */,
 			);
 			path = Models;
@@ -190,7 +187,6 @@
 				8F79D5A726AABA6F00004086 /* TextFieldExtention.swift in Sources */,
 				8F79D58D26AAA58D00004086 /* AppDelegate.swift in Sources */,
 				8F79D5A126AAA78B00004086 /* SettingViewController.swift in Sources */,
-				8F79D5A926AAC24900004086 /* TextFieldTitle.swift in Sources */,
 				8F79D5A526AAAED700004086 /* ObjectConstraint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

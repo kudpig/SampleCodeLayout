@@ -13,6 +13,19 @@ struct TextFieldLayerParameters {
     var borderColor: CGColor = UIColor.lightGray.cgColor
 }
 
+struct TitelForTextField {
+    let titleString: String
+    static func createTitles() -> [TitelForTextField] {
+        let createArray = [
+            TitelForTextField(titleString: "Xを数字で入力"),
+            TitelForTextField(titleString: "Yを数字で入力"),
+            TitelForTextField(titleString: "Widthを数字で入力"),
+            TitelForTextField(titleString: "Heightを数字で入力")
+        ]
+        return createArray
+    }
+}
+
 extension UITextField {
     
     func setTextFieldParameters(parameter: TextFieldLayerParameters = .init()) {
