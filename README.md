@@ -349,7 +349,7 @@ struct InputParameters {
     
 }
 
-struct InputData {
+final class InputData {
     
     static let shared = InputData()
     private init() {}
